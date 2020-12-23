@@ -13,6 +13,141 @@
                 <div formArrayName="servicesArray">
                     <div *ngFor="let service of servicesArray().controls; let idxSer = index">
                         <div [formGroupName]="idxSer">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th colspan="4">Servicio Detalle #{{ idxSer + 1 }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select class="form-control" formControlName="serviceName">
+                                                <option value="" selected>Selecciones un servicio</option>
+                                                <option *ngFor="let service of services; let i = index"
+                                                    value="{{ service.id }}">
+                                                    {{ service.service }}
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="number" placeholder="Precio"
+                                                formControlName="servicePrice">
+                                        </td>
+                                        <td>
+                                            <button (click)="removeService(idxSer)" class="btn btn-danger"
+                                                type="button">Eliminar Servicio</button>
+                                        </td>
+                                        <td>
+                                            <button (click)="addSubService(idxSer)" class="btn btn-primary"
+                                                type="button">Agregar sub servicio</button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="4">
+                                            <table class="table">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th colspan="4">Sub servicios</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <div formArrayName="subServices">
+                                                        <div *ngFor="let subservice of subServicesArray(idxSer).controls; let idxSub = index">
+                                                            <div [formGroupName]="idxSub">
+                                                                <tr>
+                                                                    <td>
+                                                                        <select class="form-control" formControlName="subServiceName">
+                                                                            <option value="" selected>Selecciones un sub servicio</option>
+                                                                            <option *ngFor="let subservice of subservices; let i = index"
+                                                                                value="{{ subservice.id }}">
+                                                                                {{ subservice.subservice }}
+                                                                            </option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input class="form-control" type="number" placeholder="Precio"
+                                                                            formControlName="subServicePrice">
+                                                                    </td>
+                            
+                                                                    <td>
+                                                                        <button (click)="removeSubService(idxSer, idxSub)" class="btn btn-danger"
+                                                                            type="button">Eliminar Sub Servicio</button>
+                                                                    </td>
+                            
+                                                                    <td>
+                                                                        <button (click)="addPartSubService(idxSer,idxSub)" class="btn btn-primary"
+                                                                            type="button">Agregar partes</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="4">
+                                                                        <table class="table">
+                                                                            <thead class="thead-light">
+                                                                                <tr>
+                                                                                    <th colspan="4">Partes</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <div formArrayName="parts">
+                                                                                    <div *ngFor="let part of partsArray(idxSer,idxSub).controls; let idxPart = index">
+                                                                                        <div [formGroupName]="idxPart">
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <select class="form-control" formControlName="subPartServiceName">
+                                                                                                        <option value="" selected>Selecciones un sub servicio</option>
+                                                                                                        <option *ngFor="let part of parts; let i = index"
+                                                                                                            value="{{ part.id }}">
+                                                                                                            {{ part.part }}
+                                                                                                        </option>
+                                                                                                    </select>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input class="form-control" type="number" placeholder="Cantidad"
+                                                                                                        formControlName="subPartQuantity">
+                                                                                                </td>
+
+                                                                                                <td>
+                                                                                                    <input class="form-control" type="number" placeholder="Precio"
+                                                                                                        formControlName="subPartServicePrice">
+                                                                                                </td>
+                                                        
+                                                                                                <td>
+                                                                                                    <button (click)="removePartSubService(idxSer, idxSub, idxPart)" class="btn btn-danger"
+                                                                                                        type="button">Eliminar parte</button>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" class="btn btn-block btn-primary mt-4" (click)="addService()">
+                        Agregar Servicio
+                    </button>
+                </div>
+
+
+                <!-- <div formArrayName="servicesArray">
+                    <div *ngFor="let service of servicesArray().controls; let idxSer = index">
+                        <div [formGroupName]="idxSer">
 
                             <table class="table">
                                 <thead class="thead-dark">
@@ -145,7 +280,7 @@
                             Agregar Servicio
                         </button>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success" (click)="solicitarServicio()">

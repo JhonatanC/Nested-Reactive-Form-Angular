@@ -89,25 +89,27 @@ export class FormComponent implements OnInit {
   }
 
   partsArray(indexService: number, indexSubService: number){
-    return (((this.form.get('servicesArray') as FormArray).at(indexService).get('subServices') as FormArray).at(indexSubService).get('parts') as FormArray).controls;
+    // return (((this.form.get('servicesArray') as FormArray).at(indexService).get('subServices') as FormArray).at(indexSubService).get('parts') as FormArray).controls;
+    return (((this.form.get('servicesArray') as FormArray).at(indexService).get('subServices') as FormArray).at(indexSubService).get('parts') as FormArray);
   }
 
   newPartArray(){
     return this.fb.group({
       subPartServiceName: '',
+      subPartQuantity: '',
       subPartServicePrice: ''
     });
   }
 
   addPartSubService(indexService: number, indexSubService: number){
     this.partsArray(indexService, indexSubService).push(this.newPartArray());
-    // console.log( (((this.form.get('servicesArray') as FormArray).at(indexService).get('subServices') as FormArray).at(indexSubService).get('parts') as FormArray).controls )
+    console.log( (((this.form.get('servicesArray') as FormArray).at(indexService).get('subServices') as FormArray).at(indexSubService).get('parts') as FormArray).controls )
   }
 
   // Remover sub servicio
-  // removePartSubService(idSub:number, idPart:number){
-  //   this.partsArray(idSub).removeAt(idPart);
-  // }
+  removePartSubService(idxSer:number, idxSub:number, idxPart:number){
+    this.partsArray(idxSer,idxSub).removeAt(idxPart);
+  }
 
   solicitarServicio(){
     // console.log(this.form );
