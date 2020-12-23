@@ -44,18 +44,18 @@
                                         </td>
                                     </tr>
 
-                                    <tr>
+                                    <tr *ngIf="subServicesArray(idxSer).length > 0">
                                         <td colspan="4">
-                                            <table class="table">
-                                                <thead class="thead-light">
-                                                    <tr>
-                                                        <th colspan="4">Sub servicios</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <div formArrayName="subServices">
-                                                        <div *ngFor="let subservice of subServicesArray(idxSer).controls; let idxSub = index">
-                                                            <div [formGroupName]="idxSub">
+                                            <div formArrayName="subServices">
+                                                <div *ngFor="let subservice of subServicesArray(idxSer).controls; let idxSub = index">
+                                                    <div [formGroupName]="idxSub">
+                                                        <table class="table">
+                                                            <thead class="thead-light">
+                                                                <tr>
+                                                                    <th colspan="4">Sub servicios</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
                                                                 <tr>
                                                                     <td>
                                                                         <select class="form-control" formControlName="subServiceName">
@@ -81,7 +81,7 @@
                                                                             type="button">Agregar partes</button>
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
+                                                                <tr *ngIf="partsArray(idxSer,idxSub).length > 0">
                                                                     <td colspan="4">
                                                                         <table class="table">
                                                                             <thead class="thead-light">
@@ -96,7 +96,7 @@
                                                                                             <tr>
                                                                                                 <td>
                                                                                                     <select class="form-control" formControlName="subPartServiceName">
-                                                                                                        <option value="" selected>Selecciones un sub servicio</option>
+                                                                                                        <option value="" selected>Selecciones una parte</option>
                                                                                                         <option *ngFor="let part of parts; let i = index"
                                                                                                             value="{{ part.id }}">
                                                                                                             {{ part.part }}
@@ -125,11 +125,11 @@
                                                                         </table>
                                                                     </td>
                                                                 </tr>
-                                                            </div>
-                                                        </div>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-                                                </tbody>
-                                            </table>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
